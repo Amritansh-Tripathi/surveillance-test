@@ -55,7 +55,7 @@ const SidebarCameraMenu = () => {
             >
               <div className='flex w-[110px] h-[95px] max-w-[110px] justify-center items-center overflow-clip rounded-[8px]'>
                 <iframe
-                  src={`http://localhost:8889/${camera.topic}`}
+                  src={`https://192.168.193.113:8889/${camera.topic}`}
                   className="w-full h-fit rounded"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -150,14 +150,14 @@ export default function DealsLayout({ children }: { children: React.ReactNode })
               </SidebarContent>
               <SidebarFooter />
             </Sidebar>
-            <main className="w-full min-h-screen flex flex-col bg-[#121125] p-2 hidden-scrollbar overscroll-contain">
+            <main className="w-full min-h-screen flex flex-col bg-[#121125] p-2 hidden-scrollbar overscroll-contain ">
               <div className="sticky top-10">
                 <SidebarTrigger />
                 <div className="hidden md:block">
                   <Navbar />
                 </div>
               </div>
-              <div className=" overflow-y-auto max-h-[82vh] w-full md:overflow-y-clip mt-4">{children}</div>
+              <div className=" overflow-y-auto max-h-[82vh] w-full md:overflow-y-clip mt-4 scrollbar-hide">{children}</div>
               <div className="md:hidden fixed bottom-0 left-0 right-0 bg-[#1B1B2E]">
                 <Navbar />
               </div>

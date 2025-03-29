@@ -21,7 +21,7 @@ const SurveillanceGrid = ({ gridView }: { gridView: number }) => {
           }`}
         >
           <iframe
-            src={`http://localhost:8889/${camera.topic}`}
+            src={`https://192.168.193.113:8889/${camera.topic}`}
             className="w-full h-full rounded-sm"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

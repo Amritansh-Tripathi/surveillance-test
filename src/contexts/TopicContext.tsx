@@ -69,7 +69,7 @@ export const TopicProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     // Initialize WebSocket connection
-    const ws = new WebSocket("ws://localhost:8081"); // Replace with your WebSocket server URL
+    const ws = new WebSocket("ws://192.168.193.113:8081"); // Replace with your WebSocket server URL
     setSocket(ws);
 
     ws.onopen = () => {

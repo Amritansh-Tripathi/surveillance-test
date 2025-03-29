@@ -18,7 +18,7 @@ const options = {
   rejectUnauthorized: false,
 };
 
-const client = mqtt.connect('ws://192.168.1.3:8083/mqtt', options);
+const client = mqtt.connect('ws://192.168.193.113:8083/mqtt', options);
 
 const unsubscribe$ = fromEvent(client, "close");
 

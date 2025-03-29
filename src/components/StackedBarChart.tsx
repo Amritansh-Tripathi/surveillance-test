@@ -5,6 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import TimeStepper from '@/components/time-stepper';
 
 // Register Chart.js components
 ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
@@ -23,11 +24,11 @@ const StackedBarChart = () => {
   }));
 
   const categoryColors = {
-    knownPeople: 'rgba(0, 255, 127, 0.8)',
-    unknownPeople: 'rgba(255, 69, 0, 0.8)',
-    visitors: 'rgba(255, 215, 0, 0.8)',
-    knownVehicles: 'rgba(30, 144, 255, 0.8)',
-    unknownVehicles: 'rgba(147, 112, 219, 0.8)',
+    knownPeople: 'rgba(0, 230, 118, 0.9)', // Brighter Green
+    unknownPeople: 'rgba(255, 82, 82, 0.9)', // Brighter Red
+    visitors: 'rgba(255, 193, 7, 0.9)', // Bright Yellow
+    knownVehicles: 'rgba(41, 121, 255, 0.9)', // Bright Blue
+    unknownVehicles: 'rgba(156, 39, 176, 0.9)', // Bright Purple
   };
 
   const getData = () => ({
@@ -47,47 +48,60 @@ const StackedBarChart = () => {
     scales: {
       x: {
         stacked: true,
-        ticks: { color: '#ffffff' },
+        ticks: { color: '#E0E0E0' }, // Lighter gray for visibility
         grid: { display: false },
-        title: { display: true, text: 'Hour of the Day', color: '#ffffff' },
+        title: { display: true, text: 'Hour of the Day', color: '#E0E0E0' },
+        barPercentage: 0.2, // Adjust this (Lower value = thinner bars) 
+        categoryPercentage: 0.5, // Adjust spacing between bars
+
       },
       y: {
         stacked: true,
-        ticks: { color: '#ffffff' },
+        ticks: { color: '#E0E0E0' },
         grid: { display: false },
-        title: { display: true, text: 'Count', color: '#ffffff' },
+        title: { display: true, text: 'Count', color: '#E0E0E0' },
       },
     },
     plugins: {
-      legend: { position: 'top', labels: { color: '#ffffff' } },
+      legend: {
+        position: 'top',
+        labels: {
+          color: '#E0E0E0', // Light Gray for better readability
+          font: {
+            size: 13, // Slightly larger for visibility
+          },
+        },
+      },
     },
+    maxBarThickness: 14, // Sets max width in pixels
   };
 
   return (
-    <div className="bg-gray-900 text-white p-5 rounded-lg shadow-md h-fit">
-      <div className="flex justify-between items-center mb-2">
+    <div className="w-full h-full bg-[#1B1B2E] rounded-lg ">
+      <div className="flex justify-between items-center mb-1">
         <div>
-          <label>Select Date: </label>
+          <label className='font-medium text-sm'>Select Date: </label>
           <DatePicker
             selected={selectedDate}
             onChange={(date) => date && setSelectedDate(date)}
             dateFormat="yyyy-MM-dd"
-            className="bg-gray-700 text-white px-2 py-1 rounded"
+            className="font-medium text-sm rounded-md bg-[#1D369B] py-1 px-2 text-white"
           />
         </div>
         <div>
-          <label>Entries/Exits: </label>
+          <label className='font-medium text-sm'>Entries/Exits: </label>
           <select
             onChange={(e) => setSelectedType(e.target.value as 'entries' | 'exits')}
             value={selectedType}
-            className="bg-gray-700 text-white px-2 py-1 rounded"
+            className="font-medium text-sm rounded-md bg-[#1D369B] py-1 px-2 text-white"
           >
             <option value="entries">Entries</option>
             <option value="exits">Exits</option>
           </select>
         </div>
       </div>
-      <div className="h-96">
+      <TimeStepper />
+      <div className="h-52">
         <Bar data={getData()} options={chartConfig} />
       </div>
     </div>
