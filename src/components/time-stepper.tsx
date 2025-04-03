@@ -141,9 +141,9 @@ export default function TimeStepper() {
   }
 
   return (
-    <div className="w-full space-y-1 p-1">
+    <div className="w-full space-y-1 p-0">
       <div className="hidden items-center justify-between">
-        <p className="flex items-center gap-2 text-sm text-muted-foreground">
+        <p className="flex items-center gap-1 text-sm text-muted-foreground">
           <Clock className="size-4" />
           <span>{formatTime(new Date())}</span>
         </p>

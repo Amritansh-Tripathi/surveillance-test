@@ -14,7 +14,7 @@ const StackedBarChart = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedType, setSelectedType] = useState<'entries' | 'exits'>('entries');
 
-  const pseudoData = Array.from({ length: 24 }, (_, hour) => ({
+  const pseudoData = Array.from({ length: 12 }, (_, hour) => ({
     hour,
     knownPeople: Math.floor(Math.random() * 10),
     unknownPeople: Math.floor(Math.random() * 10),
@@ -77,7 +77,7 @@ const StackedBarChart = () => {
   };
 
   return (
-    <div className="w-full h-full bg-[#1B1B2E] rounded-lg ">
+    <div className="w-full h-full bg-[#1B1B2E] rounded-lg p-2 ">
       <div className="flex justify-between items-center mb-1">
         <div>
           <label className='font-medium text-sm'>Select Date: </label>

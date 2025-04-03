@@ -18,7 +18,7 @@ const options = {
   rejectUnauthorized: false,
 };
 
-const client = mqtt.connect('ws://192.168.193.113:8083/mqtt', options);
+const client = mqtt.connect('ws://192.168.179.113:8083/mqtt', options);
 
 const unsubscribe$ = fromEvent(client, "close");
 
@@ -128,7 +128,7 @@ wss.on("connection", (ws) => {
       });
 
       // Subscribe to the logs topic
-      const logsTopic = `${topic}/logs`;
+      const logsTopic = `${topic}`;
       client.subscribe(logsTopic, { qos: 1 }, (err) => {
         if (!err) {
           console.log(`Subscribed to logs topic: ${logsTopic}`);

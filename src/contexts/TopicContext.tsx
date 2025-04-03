@@ -62,14 +62,14 @@ export const TopicProvider: React.FC = ({ children }) => {
 
   // Handle topic selection
   const selectTopic = (topicName: string) => {
-    setSelectedTopic(`${topicName}/logs`);
+    setSelectedTopic(`${topicName}`);
     console.log(`Selected topic: ${topicName}`);
     subscribeToTopic(topicName);
   };
 
   useEffect(() => {
     // Initialize WebSocket connection
-    const ws = new WebSocket("ws://192.168.193.113:8081"); // Replace with your WebSocket server URL
+    const ws = new WebSocket("ws://192.168.179.113:8081"); // Replace with your WebSocket server URL
     setSocket(ws);
 
     ws.onopen = () => {
