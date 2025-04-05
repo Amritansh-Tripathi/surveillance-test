@@ -55,7 +55,7 @@ const SidebarCameraMenu = () => {
             >
               <div className='flex w-[110px] h-[95px] max-w-[110px] justify-center items-center overflow-clip rounded-[8px]'>
                 <iframe
-                  src={`http://192.168.179.200:8889/${camera.topic}`}
+                  src={`https://192.168.33.200:8889/${camera.topic}`}
                   className="w-full h-fit rounded"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen

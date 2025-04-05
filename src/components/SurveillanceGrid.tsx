@@ -3,6 +3,15 @@ import { useCameraContext } from '@/contexts/CameraContext';
 const SurveillanceGrid = ({ gridView }: { gridView: number }) => {
   const { cameras, selectedCamera, setSelectedCamera } = useCameraContext();
 
+  const getDisplayedCameras = () => {
+    if (gridView === 1) {
+      return [selectedCamera ?? cameras[0]].filter(Boolean);
+    }
+    return cameras.slice(0, gridView * gridView);
+  };
+
+  const displayedCameras = getDisplayedCameras();
+
   return (
     <div
       className="grid bg-[#1B1B2E] rounded-lg w-full h-full p-2 m-1"
@@ -12,7 +21,7 @@ const SurveillanceGrid = ({ gridView }: { gridView: number }) => {
         gap: '0.5rem',
       }}
     >
-      {cameras.slice(0, gridView * gridView).map((camera) => (
+      {displayedCameras.map((camera) => (
         <div
           key={camera._id}
           onClick={() => setSelectedCamera(camera)}
@@ -21,7 +30,7 @@ const SurveillanceGrid = ({ gridView }: { gridView: number }) => {
           }`}
         >
           <iframe
-            src={`http://192.168.179.200:8889/${camera.topic}`}
+            src={`https://192.168.33.200:8889/${camera.topic}`}
             className="w-full h-full rounded-sm"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

@@ -121,7 +121,7 @@ const LiveLogs2: React.FC<LiveLogs2Props> = ({ CameraName, topicName }) => {
                     onStatusChange={handleStatusChange}
                   />
                 );
-              } else if (person.Name === "UNKNOWN") {
+              } else if (person.Type === "Unknown") {
                 return (
                   <EmployeeCard
                     key={personIndex}

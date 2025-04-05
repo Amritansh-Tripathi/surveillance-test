@@ -45,37 +45,44 @@ export const TopicProvider: React.FC = ({ children }) => {
       }
     });
 
-    // Update the groupedPersonals state
     setGroupedPersonals((prevGroupedPersonals) => ({
       ...prevGroupedPersonals,
       ...newGroupedPersonals,
     }));
   };
 
-  // Subscribe to a topic
   const subscribeToTopic = (topic: string) => {
-    console.log(`Subscribed to topic: ${topic}`);
+    console.log(`Trying to subscribe to topic: ${topic}`);
     if (socket && socket.readyState === WebSocket.OPEN) {
       socket.send(JSON.stringify({ action: "subscribe", topic }));
+      console.log(`Subscribed to topic: ${topic}`);
+    } else {
+      console.warn(`WebSocket not ready. Queuing subscription for: ${topic}`);
+      const interval = setInterval(() => {
+        if (socket && socket.readyState === WebSocket.OPEN) {
+          socket.send(JSON.stringify({ action: "subscribe", topic }));
+          console.log(`Delayed subscription sent for topic: ${topic}`);
+          clearInterval(interval);
+        }
+      }, 100);
     }
   };
 
-  // Handle topic selection
   const selectTopic = (topicName: string) => {
-    setSelectedTopic(`${topicName}`);
     console.log(`Selected topic: ${topicName}`);
+    setSelectedTopic(topicName);
     subscribeToTopic(topicName);
   };
 
   useEffect(() => {
-    // Initialize WebSocket connection
-    const ws = new WebSocket("ws://192.168.179.113:8081"); // Replace with your WebSocket server URL
+    const ws = new WebSocket("ws://192.168.115.1:8081"); // Update with your WebSocket server address
     setSocket(ws);
 
     ws.onopen = () => {
-      console.log("WebSocket connection established.");
+      console.log("✅ WebSocket connection established.");
       if (selectedTopic) {
         ws.send(JSON.stringify({ action: "subscribe", topic: selectedTopic }));
+        console.log(`🔁 Re-subscribed to topic: ${selectedTopic}`);
       }
     };
 
@@ -83,28 +90,25 @@ export const TopicProvider: React.FC = ({ children }) => {
       try {
         const data = JSON.parse(event.data);
         const { topic, groupedPersonals } = data;
-
-        // Update topic data in context
+        console.log("📨 Received WebSocket message:", data);
         updateTopicData(topic, groupedPersonals);
-        console.log("Received WebSocket message:", data);
       } catch (error) {
-        console.error("Error parsing WebSocket message:", error);
+        console.error("❌ Error parsing WebSocket message:", error);
       }
     };
 
     ws.onclose = () => {
-      console.log("WebSocket connection closed.");
+      console.warn("⚠️ WebSocket connection closed.");
     };
 
     ws.onerror = (error) => {
-      console.error("WebSocket error:", error);
+      console.error("🚨 WebSocket error:", error);
     };
 
-    // Cleanup WebSocket connection on unmount
     return () => {
       ws.close();
     };
-  }, [selectedTopic]);
+  }, [selectedTopic]); // Ensure re-run on topic change
 
   return (
     <TopicContext.Provider value={{ topics, groupedPersonals, subscribeToTopic, selectTopic }}>
