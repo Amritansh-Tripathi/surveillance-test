@@ -112,12 +112,13 @@ const VMS = () => {
         <div className='grid row-span-1 col-span-1 w-full h-full flex-col md:grid md:grid-cols-9 gap-2 md:grid-rows-2'>
           <div className='md:bg-[#1B1B2E] md:rounded-md md:max-h-full flex w-full h-full flex-col md:p-3 md:flex-row md:col-span-7 gap-2 md:justify-between md:row-span-1'>
             <div className='w-full md:w-fit flex justify-start items-center px-2 py-1 rounded-md bg-[#1B1B2E] md:bg-none  max-h-36'>
-              <div className='flex w-full md:w-fit h-fit justify-between '>
+              <div className='flex w-full flex-col md:w-fit h-fit justify-between gap-2'>
+                <h3 className='font-semibold text-white'>Welcome! to Visitor management</h3>
                 <DatePickerWithPresets />
               </div>
             </div>
             <div className='p-1 grid grid-cols-2 md:grid-cols-5 md:grid-flow-row-dense w-full h-full gap-x-12 md:gap-x-4 gap-y-7 md:gap-y-0 md:pr-10 relative'>
-              <div className='bg-[#4A2533] flex col-span-2 md:col-span-1 md:col-start-3 rounded-md p-2 md:p-2 md:max-h-36 md:w-fit md:h-fit relative hover:border hover:border-solid hover:border-[#FA5A7D]'>
+              <div className='bg-[#4A2533] flex col-span-2 md:col-span-1 md:col-start-2 rounded-md p-2 md:p-2 md:max-h-36 md:w-fit md:h-fit relative hover:border hover:border-solid hover:border-[#FA5A7D]'>
                 <div className='flex w-full md:flex-col justify-between md:gap-2 items-center h-fit md:items-start md:h-full md:w-full'>
                   <p className='text-nowrap text-white font-semibold text-lg md:text-xl'>{activityData.length}</p>
                   <div className='flex flex-row md:flex-col justify-end items-center md:items-start w-fit h-fit gap-3'>
@@ -228,7 +229,7 @@ const VMS = () => {
                   </SheetContent>
                 </Sheet>
               </div>
-              <div className='bg-[#20457E] flex col-span-1 md:col-start-4 rounded-md md:h-fit md:max-w-36 relative hover:border hover:border-solid hover:border-[#FA5A7D]'>
+              <div className='bg-[#20457E] flex col-span-1 ml-4 md:col-start-3 rounded-md md:h-fit md:max-w-36 relative hover:border hover:border-solid hover:border-[#FA5A7D]'>
                 <Dialog>
                   <DialogTrigger className='w-full p-0'>
                     <div className='flex flex-col w-full h-full justify-between md:gap-2 items-start p-1 md:p-2'>
@@ -254,7 +255,7 @@ const VMS = () => {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className='bg-[#204534] flex col-span-1 md:col-start-5 rounded-md md:h-fit md:w-fit hover:border hover:border-solid hover:border-[#FA5A7D]'>
+              <div className='bg-[#204534] flex col-span-1 md:col-start-4 rounded-md md:h-fit md:w-fit hover:border hover:border-solid hover:border-[#FA5A7D]'>
 
                 <Dialog>
                   <DialogTrigger className='w-full p-0'>

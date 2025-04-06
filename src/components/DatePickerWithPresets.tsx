@@ -30,7 +30,7 @@ export function DatePickerWithPresets() {
           variant={"invite"}
           size='sm'
           className={cn(
-            "w-fit justify-center gap-2 items-center text-left text-xs md:text-lg md:gap-4 font-bold md:font-semibold p-0",
+            "w-fit justify-center gap-2 items-center text-left text-xs md:text-xl md:gap-4 font-bold md:font-semibold py-1 px-2",
             !date && "text-muted-foreground"
           )}
         >
