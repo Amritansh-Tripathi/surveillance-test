@@ -41,7 +41,7 @@ const SidebarCameraMenu = () => {
   };
 
   return (
-    <ScrollArea className="min-h-80 h-auto w-full rounded-lg border">
+    <ScrollArea className="min-h-80 h-auto w-full rounded-lg border scrollbar-hide">
       <div className='grid grid-flow-row w-full space-y-4 p-2'>
         {Array.isArray(cameras) ? cameras.map((camera) => (
           <SidebarMenuItem

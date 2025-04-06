@@ -5,7 +5,7 @@ let isConnected = false;
 export async function connect() {
     if (!isConnected) {
         try {
-            await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/ARIS');
+            await mongoose.connect(process.env.MONGODB_URL || 'mongodb://192.168.128.113:27017/ARIS');
             isConnected = true;
             console.log('MongoDB connected');
         } catch (error) {

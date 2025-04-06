@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/select"
 
 export function DatePickerWithPresets() {
-  const [date, setDate] = React.useState<Date>()
+  const [date, setDate] = React.useState<Date>(new Date()) // ✅ Default to today
 
   return (
     <Popover>

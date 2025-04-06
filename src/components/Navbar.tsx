@@ -21,19 +21,19 @@ const Navbar = () => {
         <Logo />
       </Link>
       <div className='flex flex-row justify-around md:justify-center items-center w-full px-2 md:px-5'>
-        <Link href="/Surveillance/mobile" className={`p-2 rounded ${isActive('/Surveillance')}`}>
+        <Link href="/surveillance/mobile" className={`p-2 rounded ${isActive('/Surveillance')}`}>
           <Image src="/svg/surveillanceIcon.svg" width={30} height={30} alt="surveillance" className="md:w-[30px] md:h-[30px]" />
         </Link>
-        <Link href="/Summary" className={`p-2 rounded ${isActive('/Summary')}`}>
+        <Link href="/Summary" className={` hidden p-2 rounded ${isActive('/Summary')}`}>
           <Image src="/svg/summaryIcon.svg" width={30} height={30} alt="summary" className="md:w-[30px] md:h-[30px]" />
         </Link>
-        <Link href="/VMS/mobile" className={`p-2 rounded ${isActive('/VMS')}`}>
+        <Link href="/vmsV2" className={`p-2 rounded ${isActive('/VMS')}`}>
           <Image src="/svg/visitorIcon2.svg" width={30} height={30} alt="vms" className="md:w-[30px] md:h-[30px]" />
         </Link>
-        <Link href="/Alarms&Device" className={`p-2 rounded ${isActive('/Alarms&Device')}`}>
+        <Link href="/Alarms&Device" className={` hidden p-2 rounded ${isActive('/Alarms&Device')}`}>
           <Image src="/svg/AlarmsDevice.svg" width={30} height={30} alt="alarms device" className="md:w-[30px] md:h-[30px]" />
         </Link>
-        <Link href="/ControlPanel" className={`p-2 rounded ${isActive('/ControlPanel')}`}>
+        <Link href="/ControlPanel" className={`hidden p-2 rounded ${isActive('/ControlPanel')}`}>
           <Image src="/svg/controlpanelIcon.svg" width={30} height={30} alt="control panel" className="md:w-[30px] md:h-[30px]" />
         </Link>
       </div>

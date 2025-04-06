@@ -13,14 +13,14 @@ interface LiveCapacityData {
   Visitors: number;
 }
 
-const POLLING_INTERVAL = 2000; // 2 seconds
+const POLLING_INTERVAL = 200000; // 2 seconds
 
 const DoughnutChart: FC = () => {
   const [chartData, setChartData] = useState<any>(null);
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://192.168.193.113:3000/api/oldapi/capacity-sse');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URLs}/oldapi/capacity-sse`);
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

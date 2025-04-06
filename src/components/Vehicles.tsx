@@ -47,7 +47,7 @@ const Vehicles = ({ view }: VehiclesProps) => {
   const componentRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://192.168.193.113:3000/api/oldapi/vehicles')
+    fetch(`${process.env.NEXT_PUBLIC_API_URLs}/oldapi/vehicles`)
       .then((response) => response.json())
       .then((data) => {
         const transformedVehicles = data.vehicles.map((vehicle: VehicleFromAPI) =>

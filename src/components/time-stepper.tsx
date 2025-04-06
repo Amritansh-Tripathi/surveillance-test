@@ -31,43 +31,66 @@ const sampleAlerts: Record<string, Alert[]> = {
   "13": [
     {
       id: "1",
-      title: "High CPU Usage",
+      title: "Unknown Person Detected",
       severity: "high",
-      message: "Server CPU usage exceeded 90%",
-      timestamp: "1:15 PM",
+      message: "Unknown person detected at location Cam 1",
+      timestamp: "1:10 PM",
     },
     {
       id: "2",
-      title: "Memory Warning",
-      severity: "medium",
-      message: "Available memory below 20%",
-      timestamp: "1:30 PM",
+      title: "Known Person Detected",
+      severity: "low",
+      message: "Known person detected at location Cam 2",
+      timestamp: "1:20 PM",
     },
     {
       id: "3",
-      title: "Disk Space Alert",
-      severity: "low",
-      message: "Disk usage reaching threshold",
-      timestamp: "1:45 PM",
+      title: "Vehicle Detected",
+      severity: "medium",
+      message: "Vehicle detected at location Cam 3",
+      timestamp: "1:30 PM",
     },
   ],
   "16": [
     {
       id: "4",
-      title: "Network Latency",
+      title: "Unknown Person Detected",
       severity: "high",
-      message: "High network latency detected",
-      timestamp: "4:10 PM",
+      message: "Unknown person detected at location Cam 2",
+      timestamp: "4:05 PM",
     },
     {
       id: "5",
-      title: "Database Connection",
-      severity: "high",
-      message: "Database connection timeout",
-      timestamp: "4:15 PM",
+      title: "Known Person Detected",
+      severity: "low",
+      message: "Known person detected at location Cam 1",
+      timestamp: "4:25 PM",
     },
   ],
-}
+  "10": [
+    {
+      id: "6",
+      title: "Unknown Person Detected",
+      severity: "high",
+      message: "Unknown person detected at location Cam 3",
+      timestamp: "10:10 PM",
+    },
+    {
+      id: "7",
+      title: "Vehicle Detected",
+      severity: "high",
+      message: "Vehicle detected at location Cam 2",
+      timestamp: "10:20 PM",
+    },
+    {
+      id: "8",
+      title: "Known Person Detected",
+      severity: "high",
+      message: "Known person detected at location Cam 1",
+      timestamp: "10:30 PM",
+    },
+  ],
+};
 
 const severityColors = {
   low: "bg-yellow-500",
@@ -142,7 +165,8 @@ export default function TimeStepper() {
 
   return (
     <div className="w-full space-y-1 p-0">
-      <div className="hidden items-center justify-between">
+      <h2 className="font-semibold text-white">Alerts</h2>
+      <div className="flex items-center justify-between">
         <p className="flex items-center gap-1 text-sm text-muted-foreground">
           <Clock className="size-4" />
           <span>{formatTime(new Date())}</span>
@@ -205,7 +229,7 @@ export default function TimeStepper() {
       </div>
 
       <div className="overflow-x-auto py-3 pb-4">
-        <Stepper value={currentStep} orientation="horizontal" className="min-w-[800px]">
+        <Stepper value={currentStep} orientation="horizontal" className="min-w-[380px]">
           {hours.map((hour, index) => {
             const hourAlerts = sampleAlerts[hour.toString()] || []
             const hasAlerts = hourAlerts.length > 0
@@ -230,7 +254,7 @@ export default function TimeStepper() {
                       ) : (
                         <StepperIndicator />
                       )}
-                      <StepperTitle className="text-xs">{formatHour(hour)}</StepperTitle>
+                      <StepperTitle className="text-xs text-white">{formatHour(hour)}</StepperTitle>
                     </StepperTrigger>
                   </PopoverTrigger>
                   {hasAlerts && (

@@ -54,7 +54,7 @@ const Employees = ({ view }: EmployeesProps) => {
   const componentRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://192.168.193.113:3000/api/oldapi/personals')
+    fetch(`${process.env.NEXT_PUBLIC_API_URLs}/oldapi/personals`)
       .then((response) => response.json())
       .then((data) => {
         const transformedEmployees = data.personals.map((employee: EmployeeFromAPI) =>
@@ -69,7 +69,7 @@ const Employees = ({ view }: EmployeesProps) => {
     <div className="flex flex-col justify-start items-start w-full h-full">
       {/* Content */}
       <div ref={componentRef} className="w-full h-full p-2 bg-[#1B1B2E]">
-      <ScrollArea className="h-40 w-full">
+      <ScrollArea className="h-80 w-full">
         {view === 'card' ? (
           <div className="grid grid-cols-1 md:grid-cols-4 w-full gap-2">
             {employees.map((employee) => (

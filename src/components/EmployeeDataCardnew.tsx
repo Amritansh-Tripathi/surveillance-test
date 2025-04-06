@@ -4,10 +4,14 @@ import { FiArrowUpLeft } from "react-icons/fi";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { ScrollArea } from '@radix-ui/react-scroll-area';
 
 
 interface Activity {
@@ -67,7 +71,7 @@ const EmployeeCardActivity: React.FC<EmployeeCardProps> = ({
   useEffect(() => {
     const fetchActivities = async () => {
       try {
-        const response = await fetch(`http://192.168.193.113:3000/api/oldapi/personalActivity?Person_id=${Person_id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URLs}/oldapi/personalActivity?Person_id=${Person_id}`);
         const data = await response.json();
         if (!response.ok) {
           throw new Error(data.error || 'Error fetching activities');
@@ -147,42 +151,48 @@ const EmployeeCardActivity: React.FC<EmployeeCardProps> = ({
         )}
       </div>
       {ProfilePic && (
-          <Image
-            src={ProfilePic}
-            alt="amrit"
-            width={90}
-            height={50}
-            className={`absolute top-1/2 left-[40%] transform -translate-x-1/2 -translate-y-1/2 border-opacity-30 border-4 rounded-full object-cover w-[60px] h-[60px] zoom-in-50 border-r-2 border-spacing-1 border-green-600`}
-          />
-        )}
+        <Image
+          src={ProfilePic}
+          alt="amrit"
+          width={90}
+          height={50}
+          className={`absolute top-1/2 left-[40%] transform -translate-x-1/2 -translate-y-1/2 border-opacity-30 border-4 rounded-full object-cover w-[60px] h-[60px] zoom-in-50 border-r-2 border-spacing-1 border-green-600`}
+        />
+      )}
       <Sheet>
         <SheetTrigger>
           <div className="absolute right-0 bottom-0 h-5 w-5 rounded-l flex justify-center items-center bg-[#1d37b951] transition-opacity hover:bg-white hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-            <FiArrowUpLeft className='text-[#1D36B9] h-5 w-5'/>
+            <FiArrowUpLeft className='text-[#1D36B9] h-5 w-5' />
             <span className="sr-only">Close</span>
           </div>
         </SheetTrigger>
-        <SheetContent side="right" className="w-[370px]">
-          <div className='flex flex-row justify-between p-2 mt-2'>
-            {ProfilePic && (
-              <Image
-                src={ProfilePic}
-                alt="Profile Pic"
-                width={90}
-                height={50}
-                className="border-r-2 border-spacing-1 rounded-full object-cover w-10 h-10 md:w-12 md:h-12 border-green-600"
-              />
-            )}
-            <div className='flex flex-col justify-center items-end text-right gap-2'>
-              <p className="text-white capitalize font-roboto text-sm font-semibold w-full flex flex-shrink-0 flex-nowrap">
-                {name}
-              </p>
-              <p className="text-white capitalize font-roboto text-xs font-medium  text-right flex flex-shrink-0 flex-nowrap">
-                {role}
-              </p>
-            </div>
-          </div>
-          <Separator className='mb-2'/>
+        <SheetContent side="right" className="w-[370px] bg-[#1B1B2E]">
+          <SheetHeader>
+            <SheetTitle className='text-white'>Personal activities</SheetTitle>
+            <SheetDescription>
+              <div className='flex flex-row justify-between p-2 mt-2'>
+                {ProfilePic && (
+                  <Image
+                    src={ProfilePic}
+                    alt="Profile Pic"
+                    width={90}
+                    height={50}
+                    className="border-r-2 border-spacing-1 rounded-full object-cover w-10 h-10 md:w-12 md:h-12 border-green-600"
+                  />
+                )}
+                <div className='flex flex-col justify-center items-end text-right gap-2'>
+                  <p className="text-white capitalize font-roboto text-sm font-semibold w-full flex flex-shrink-0 flex-nowrap">
+                    {name}
+                  </p>
+                  <p className="text-white capitalize font-roboto text-xs font-medium  text-right flex flex-shrink-0 flex-nowrap">
+                    {role}
+                  </p>
+                </div>
+              </div>
+            </SheetDescription>
+          </SheetHeader>
+
+          <Separator className='mb-2' />
           <div className='flex w-full justify-between flex-row items-center'>
             <div className='flex flex-col items-start justify-center w-full gap-3'>
               <p className="text-white/60 uppercase font-roboto text-xs font-normal">
@@ -199,29 +209,27 @@ const EmployeeCardActivity: React.FC<EmployeeCardProps> = ({
               </p>
             </div>
           </div>
-          <Separator className='mb-4 mt-2'/>
+          <Separator className='mb-4 mt-2' />
           <p className="text-white uppercase font-roboto text-base font-semibold w-max mb-4">
             Activities
           </p>
-          <div className='flex w-full max-h-full overflow-y-auto p-2 flex-col gap-4'>
-            {activities.map((activity, index) => (
-              <div key={index} className="flex flex-row-reverse gap-2 justify-end items-center w-full bg-[#121125] rounded-md">
-                {/* <p className="text-white/60 font-roboto text-xs font-normal flex flex-row text-nowrap">
+            <ScrollArea className="h-64 w-full px-1 gap-2 rounded-md flex flex-col">
+              {activities.map((activity, index) => (
+                <div key={index} className="flex flex-row-reverse gap-2 justify-end items-center w-full bg-[#121125] rounded-md">
+                  {/* <p className="text-white/60 font-roboto text-xs font-normal flex flex-row text-nowrap">
                  in camera <span className='text-white font-semibold'>{activity.Camera}</span>
                 </p> */}
-                <p className="text-white/60 font-roboto text-xs font-normal flex flex-row text-nowrap">
-                <span className='text-white font-semibold'>detected on {formatTimestamp(activity.TimeStamp)}</span>
-                </p>
-              
+                  <p className="text-white/60 font-roboto text-xs font-normal flex flex-row text-nowrap">
+                    <span className='text-white font-semibold'>detected on {formatTimestamp(activity.TimeStamp)}</span>
+                  </p>
+                  <Avatar>
+                    <AvatarImage src={activity.Snapshot} />
+                    <AvatarFallback>P</AvatarFallback>
+                  </Avatar>
 
-              <Avatar>
-                <AvatarImage src={activity.Snapshot} />
-                <AvatarFallback>P</AvatarFallback>
-              </Avatar>
-
-              </div>
-            ))}
-          </div>
+                </div>
+              ))}
+            </ScrollArea>
         </SheetContent>
       </Sheet>
     </div>

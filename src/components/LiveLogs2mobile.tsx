@@ -50,7 +50,7 @@ const LiveLogs2mobile: React.FC<LiveLogs2Props> = ({ CameraName, topicName }) =>
   return (
     <div className='grid h-full'>
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-2 sm:gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 md:gap-2 xl:grid-cols-6 gap-2 sm:gap-3">
           {[...Array(6)].map((_, index) => (
             <div
               key={index}

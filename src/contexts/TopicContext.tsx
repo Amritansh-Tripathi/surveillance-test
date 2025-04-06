@@ -75,7 +75,7 @@ export const TopicProvider: React.FC = ({ children }) => {
   };
 
   useEffect(() => {
-    const ws = new WebSocket("ws://192.168.115.1:8081"); // Update with your WebSocket server address
+    const ws = new WebSocket("ws://192.168.128.113:8081"); // Update with your WebSocket server address
     setSocket(ws);
 
     ws.onopen = () => {
