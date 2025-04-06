@@ -7,30 +7,29 @@ connect();
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
-        // Fetch the latest 50 activities sorted by TimeStamp in descending order
-        const activities = await Activity.find().sort({ TimeStamp: -1 }).limit(50);
+        // ✅ Fetch all activities, sorted by TimeStamp (latest first)
+        const activities = await Activity.find().sort({ TimeStamp: -1 }).lean();
 
-        // Fetch personal details for each activity based on the personal's ID
+        // ✅ Loop over each activity and add relevant details
         const activitiesWithDetails = await Promise.all(
             activities.map(async (activity) => {
-                const result: any = activity.toObject();
+                const result: any = { ...activity }; // Already a plain object due to .lean()
 
-                // Check if the activity is related to a vehicle
                 if (activity.Vehicle_type) {
-                    // If it's a vehicle, include the toolbar information
+                    // 🚗 It's a vehicle
                     result.isVehicle = true;
                     result.toolbar = {
                         Vehicle_type: activity.Vehicle_type,
                         Camera: activity.Camera,
-                        TimeStamp: activity.TimeStamp
+                        TimeStamp: activity.TimeStamp,
                     };
                 } else if (activity.Person_id) {
-                    // If it's not a vehicle and has a Person_id, fetch personal details
-                    const personal = await Personals.findOne({ Person_id: activity.Person_id });
+                    // 👤 It's a personal activity
+                    const personal = await Personals.findOne({ Person_id: activity.Person_id }).lean();
                     result.isVehicle = false;
-                    result.personalDetails = personal ? personal.toObject() : null;
+                    result.personalDetails = personal || null;
                 } else {
-                    // Handle case where neither Vehicle_type nor Person_id is present
+                    // ❓ Neither vehicle nor personal
                     result.isVehicle = false;
                     result.personalDetails = null;
                 }

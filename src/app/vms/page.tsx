@@ -51,6 +51,7 @@ interface PersonalDetails {
 }
 
 interface ActivityData {
+  INFO: any;
   TimeStamp: number;
   Camera: string;
   Type: string;
@@ -169,19 +170,30 @@ const VMS = () => {
                           </div> */}
                     <div className="p-1 overflow-y-scroll max-h-screen pb-20 hidden-scrollbar">
                       {activityData.map((activity, index) => {
-                        if (activity.isVehicle) {
+                        if (
+                          activity.class === "car" ||
+                          activity.class === "bike" ||
+                          activity.class === "bicycle" ||
+                          activity.class === "motorbike" ||
+                          activity.class === "aeroplane" ||
+                          activity.class === "bus" ||
+                          activity.class === "train" ||
+                          activity.class === "truck" ||
+                          activity.class === "boat" ||
+                          activity.class === "traffic light"
+                        ) {
                           return (
-                            <div key={index} className="p-0 rounded-md mb-10">
-                              <ObjectCard
-                                key={activity._id}
-                                id={activity._id}
-                                type={activity.class} // e.g., "car" if isVehicle: true
-                                Snapshot={activity.Snapshot}
-                                timeStamp={activity.INFO.TimeStamp}
-                                borderColor="#1D36B9"
-                                name="vehicle"
-                              />
-                            </div>
+                          <div key={index} className="p-0 rounded-md mb-10">
+                            <ObjectCard
+                            key={activity._id}
+                            id={activity._id}
+                            type={activity.class} // e.g., "car" if isVehicle: true
+                            Snapshot={activity.Snapshot}
+                            timeStamp={activity.INFO.TimeStamp}
+                            borderColor="#1D36B9"
+                            name="vehicle"
+                            />
+                          </div>
                           );
                         } else if (activity.personalDetails) {
                           return (
@@ -207,7 +219,7 @@ const VMS = () => {
                               />
                             </div>
                           );
-                        } else if (activity.class === "person") {
+                        } else if (activity.class === "person" && activity.Type === "Unknown") {
                           return (
                             <div key={index} className="p-0 rounded-md mb-10">
                               <ObjectCard
@@ -216,7 +228,7 @@ const VMS = () => {
                                 type="person"
                                 Snapshot={activity.Snapshot}
                                 timeStamp={activity.INFO.TimeStamp}
-                                borderColor="#FA5A7D"
+                                borderColor="#FF0000"
                                 name="unknown person"
                               />
                             </div>
